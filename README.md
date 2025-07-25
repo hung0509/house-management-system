@@ -7,7 +7,6 @@ A microservice-based system for managing real estate information, including prop
 - **Java 17** / **Spring Boot**
 - **Spring Cloud** (Eureka, Config, Gateway)
 - **PostgreSQL** (or MySQL)
-- **Euruka**
 - **Docker & Docker Compose**
 - **Spring Security / JWT**
 
