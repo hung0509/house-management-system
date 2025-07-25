@@ -1,0 +1,128 @@
+version: '3.8'
+services:
+  my-platform-builder:
+    image: maven:3.9.6-eclipse-temurin-17
+    container_name: my-platform-builder
+    working_dir: /build
+    command: mvn clean install -DskipTests
+    volumes:
+      - ./:/build
+      - maven-repo:/root/.m2
+    networks:
+      - backend
+      - db-net
+
+  common-service:
+    build:
+      context: .
+      dockerfile: common-service/Dockerfile
+      args:
+        MODULE_NAME: common-service
+    depends_on:
+      - my-platform-builder
+    image: common-service
+    container_name: common-service
+    volumes:
+      - maven-repo:/root/.m2
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - backend
+      - db-net
+
+  service-discovery:
+    build:
+      context: .
+      dockerfile: service-discovery/Dockerfile
+      args:
+        MODULE_NAME: service-discovery
+    depends_on:
+      - my-platform-builder
+    image: service-discovery
+    container_name: service-discovery
+    volumes:
+      - maven-repo:/root/.m2
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - 8761:8761
+    networks:
+      - backend
+      - db-net
+
+  proxy-client:
+    build:
+      context: .
+      dockerfile: proxy-client/Dockerfile
+      args:
+        MODULE_NAME: proxy-client
+    depends_on:
+      - service-discovery
+    image: proxy-client
+    container_name: proxy-client
+    volumes:
+      - maven-repo:/root/.m2
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - 8888:8888
+    networks:
+      - backend
+      - db-net
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+      args:
+        MODULE_NAME: api-gateway
+    depends_on:
+      - service-discovery
+    image: api-gateway
+    container_name: api-gateway
+    volumes:
+      - maven-repo:/root/.m2
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - 8443:8443
+    networks:
+      - backend
+      - db-net
+
+  identity-service:
+    build:
+      context: .
+      dockerfile: identity-service/Dockerfile
+      args:
+        MODULE_NAME: identity-service
+    depends_on:
+      - service-discovery
+    image: identity-service
+    container_name: identity-service
+    volumes:
+      - maven-repo:/root/.m2
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE}
+      - SPRING_PROFILES_ACTIVE=prod
+      - IDENTITY_DB_HOST=${IDENTITY_DB_HOST}
+      - IDENTITY_DB_PORT=${IDENTITY_DB_PORT}
+      - IDENTITY_DB_NAME=${IDENTITY_DB_NAME}
+      - IDENTITY_DB_USERNAME=${IDENTITY_DB_USERNAME}
+      - IDENTITY_DB_PASSWORD=${IDENTITY_DB_PASSWORD}
+
+    ports:
+      - 8258:8258
+    networks:
+      - backend
+      - db-net
+
+networks:
+  backend:
+  db-net:
+    external: true
+volumes:
+  maven-repo:
