@@ -12,6 +12,6 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer>, JpaSpecificationExecutor<Role> {
-    @Query("SELECT p FROM Role p WHERE p.name IN :names")
-    List<Role> findRolesByNames(@Param("names") List<Integer> names);
+    @Query("SELECT p FROM Role p WHERE p.id IN :ids")
+    List<Role> findRolesByIds(@Param("ids") List<Integer> ids);
 }

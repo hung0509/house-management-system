@@ -10,9 +10,9 @@ import java.util.Collection;
 import java.util.List;
 
 @Setter
+@Getter
 @Builder
 public class UserDetailCustom implements UserDetails {
-    @Getter
     private Integer userId;
     private String username;
     private String password;
@@ -25,12 +25,12 @@ public class UserDetailCustom implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "";
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.username;
     }
 
 

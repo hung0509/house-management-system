@@ -3,7 +3,9 @@ package com.muabanbds.proxy_client.config.filter;
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
 import com.muabanbds.proxy_client.business.identity.service.AccountClientService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +15,19 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
+@Slf4j
 public class UserDetailServiceCustom implements UserDetailsService {
+    @Autowired
     AccountClientService accountClientService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ApiResponse<AccountResponse> response = accountClientService.findByUsername(username).getBody();
+        ApiResponse<AccountResponse> response = accountClientService.findByUsername(username);
 
         if(response != null && response.getCode() != HttpStatus.SC_OK){
 
             AccountResponse accountResponse = response.getResult();
+
             return UserDetailCustom.builder()
                     .userId(accountResponse.getUserId())
                     .username(accountResponse.getUsername())

@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "d_permission")
-public class Permission {
+public class Permission extends CommonMappedEntity{
     @Id
     @Column(name = "d_permission_id", nullable = false, precision = 10)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "permission_id_seq")

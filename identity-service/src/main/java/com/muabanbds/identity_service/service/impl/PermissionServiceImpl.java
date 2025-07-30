@@ -10,6 +10,7 @@ import com.muabanbds.identity_service.repository.PermissionRepository;
 import com.muabanbds.identity_service.service.PermissionService;
 import com.muabanbds.identity_service.specification.PermissionSpecification;
 import jakarta.persistence.Query;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -62,6 +63,7 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
+    @Transactional
     public ApiResponse<PermissionResponse> save(PermissionRequest req) {
         log.info("***Log permission service - save permission***");
         log.info("{dto} :" + req);

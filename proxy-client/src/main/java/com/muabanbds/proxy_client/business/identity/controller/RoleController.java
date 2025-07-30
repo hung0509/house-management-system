@@ -3,17 +3,16 @@ package com.muabanbds.proxy_client.business.identity.controller;
 import com.muabanbds.common_service.dto.identityDto.request.RoleRequest;
 import com.muabanbds.common_service.dto.identityDto.response.RoleResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
+import com.muabanbds.common_service.payload.ApiResponsePagination;
 import com.muabanbds.proxy_client.business.identity.service.RoleClientService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.openfeign.SpringQueryMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/roles")
@@ -24,8 +23,14 @@ public class RoleController {
     RoleClientService clientService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<RoleResponse>> create(@RequestBody RoleRequest req) {
+    public ApiResponse<RoleResponse> create(@RequestBody RoleRequest req) {
         log.info("*** Save, controller; save role  ***");
-        return ResponseEntity.ok(this.clientService.create(req).getBody());
+        return this.clientService.create(req);
+    }
+
+    @GetMapping
+    public ApiResponsePagination<List<RoleResponse>> getAll(@SpringQueryMap RoleRequest req){
+        log.info("*** Save, controller; get all role  ***");
+        return this.clientService.getAll(req);
     }
 }

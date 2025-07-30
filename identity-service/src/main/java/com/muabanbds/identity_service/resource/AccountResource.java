@@ -23,4 +23,10 @@ public class AccountResource {
         log.info("***Log account resource - get account by username***");
         return accountService.findByUsername(username);
     }
+
+    @PostMapping
+    public ApiResponse<AccountResponse> create(@RequestBody AccountRequest req) {
+        log.info("***Log account resource - create account***");
+        return accountService.save(req);
+    }
 }

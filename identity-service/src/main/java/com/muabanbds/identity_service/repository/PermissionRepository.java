@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface PermissionRepository extends CrudRepository<Permission, Integer>, JpaSpecificationExecutor<Permission> {
-    @Query("SELECT p FROM Permission p WHERE p.name IN :names")
-    List<Permission> findPermissionsByNames(@Param("names") List<String> names);
+    @Query("SELECT p FROM Permission p WHERE p.code IN :names")
+    List<Permission> findPermissionsByCodes(@Param("names") List<String> names);
 }

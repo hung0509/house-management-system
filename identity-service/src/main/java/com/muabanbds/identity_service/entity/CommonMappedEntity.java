@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class CommonMappedEntity {
-    @Column(name = "is_active", columnDefinition = "varchar(1) default 'Y'", insertable = false)
+    @Column(name = "is_active", columnDefinition = "varchar(1) default 'Y'")
     String isActive = "Y";
 
     @Column(name = "created_at",updatable = false)

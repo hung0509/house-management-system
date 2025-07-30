@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
@@ -17,5 +17,5 @@ public class AccountResponse {
     String password;
     Integer userId;
     Integer roleId;
-    Set<RoleResponse> roles;
+    List<RoleResponse> roles;
 }

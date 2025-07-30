@@ -16,6 +16,7 @@ import com.muabanbds.identity_service.repository.RolePermissionRepository;
 import com.muabanbds.identity_service.repository.RoleRepository;
 import com.muabanbds.identity_service.service.RoleService;
 import com.muabanbds.identity_service.specification.RoleSpecification;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -79,6 +80,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public ApiResponse<RoleResponse> save(RoleRequest req) {
         log.info("***Log role service - save role***");
         log.info("{dto} :" + req);
@@ -88,7 +90,7 @@ public class RoleServiceImpl implements RoleService {
 
         List<PermissionResponse> permissionResponses = new ArrayList<>();
         if(req.getPermissions() != null && !req.getPermissions().isEmpty()) {
-            List<Permission> permissions = permissionRepository.findPermissionsByNames(req.getPermissions());
+            List<Permission> permissions = permissionRepository.findPermissionsByCodes(req.getPermissions());
 
             if (permissions.size() != req.getPermissions().size()) {
                 throw new AppException(ErrorCode.PERMISSION_INVALID);
@@ -118,6 +120,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public ApiResponse<RoleResponse> update(Integer id, RoleRequest req) {
         log.info("***Log role service - update role***");
         log.info("{dto} :" + req);
@@ -127,7 +130,7 @@ public class RoleServiceImpl implements RoleService {
 
         List<PermissionResponse> permissionResponses = new ArrayList<>();
         if(req.getPermissions() != null) {
-            List<Permission> permissions = permissionRepository.findPermissionsByNames(req.getPermissions());
+            List<Permission> permissions = permissionRepository.findPermissionsByCodes(req.getPermissions());
 
             if (permissions.size() != req.getPermissions().size()) {
                 throw new AppException(ErrorCode.PERMISSION_INVALID);

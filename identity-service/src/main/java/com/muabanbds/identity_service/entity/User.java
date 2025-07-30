@@ -18,8 +18,8 @@ import java.time.Instant;
 public class User extends CommonMappedEntity{
     @Id
     @Column(name = "d_user_id", nullable = false, precision = 10)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_sq")
-    @SequenceGenerator(name = "user_id_sq", sequenceName = "user_id_sq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_id_seq")
+    @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
     Integer id;
 
     @Column(name = "full_name")

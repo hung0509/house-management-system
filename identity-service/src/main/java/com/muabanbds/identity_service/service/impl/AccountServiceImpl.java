@@ -3,6 +3,7 @@ package com.muabanbds.identity_service.service.impl;
 import com.muabanbds.common_service.dto.identityDto.request.AccountRequest;
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.dto.identityDto.response.PermissionResponse;
+import com.muabanbds.common_service.dto.identityDto.response.RoleResponse;
 import com.muabanbds.common_service.exception.AppException;
 import com.muabanbds.common_service.exception.ErrorCode;
 import com.muabanbds.common_service.payload.ApiResponse;
@@ -13,11 +14,13 @@ import com.muabanbds.identity_service.repository.AccountRoleRepository;
 import com.muabanbds.identity_service.repository.RoleRepository;
 import com.muabanbds.identity_service.repository.UserRepository;
 import com.muabanbds.identity_service.service.AccountService;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class AccountServiceImpl implements AccountService {
     AccountRoleRepository accountRoleRepository;
 
     ModelMapper modelMapper;
+    PasswordEncoder passwordEncoder;
 
     @Override
     public ApiResponsePagination<List<AccountResponse>> findAll(AccountRequest request) {
@@ -51,6 +55,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public ApiResponse<AccountResponse> save(AccountRequest req) {
         log.info("***Log account service - save account ***");
         log.info("{req} :" + req);
@@ -62,12 +67,13 @@ public class AccountServiceImpl implements AccountService {
             log.info("{user} :" + user);
 
             account = modelMapper.map(req, Account.class);
+            account.setPassword(passwordEncoder.encode(req.getPassword()));
             account.setUserId(user.getId());
             account = accountRepository.save(account);
             log.info("{account} :" + account);
 
             if(req.getRoles() != null && !req.getRoles().isEmpty()){
-                List<Role> roles = roleRepository.findRolesByNames(req.getRoles());
+                List<Role> roles = roleRepository.findRolesByIds(req.getRoles());
 
                 if(roles.size() != req.getRoles().size()){
                     throw new AppException(ErrorCode.ROLE_INVALID);
@@ -94,10 +100,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public ApiResponse<AccountResponse> update(Integer id, AccountRequest req) {
         log.info("***Log account service - update account ***");
         log.info("{req} :" + req);
         Account account = accountRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.ACCOUNT_NOT_EXIST));
+
+        if(req.getPassword() != null)
+            account.setPassword(passwordEncoder.encode(req.getPassword()));
 
         User user = userRepository.findById(account.getId()).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXIST));
         if(req.getUser() != null){
@@ -106,7 +116,7 @@ public class AccountServiceImpl implements AccountService {
         }
 
         if(req.getRoles() != null && !req.getRoles().isEmpty()){
-            List<Role> roles = roleRepository.findRolesByNames(req.getRoles());
+            List<Role> roles = roleRepository.findRolesByIds(req.getRoles());
 
             if(roles.size() != req.getRoles().size()){
                 throw new AppException(ErrorCode.ROLE_INVALID);
@@ -152,8 +162,13 @@ public class AccountServiceImpl implements AccountService {
             throw new AppException(ErrorCode.UNAUTHENTICATED);
         }
 
+        List<Integer> roleIds = accountRoleRepository.findIdsByAccountId(account.getId());
+        List<Role> roles = roleRepository.findAllById(roleIds);
+
+        AccountResponse accountResponse = modelMapper.map(account, AccountResponse.class);
+        accountResponse.setRoles(roles.stream().map(item -> modelMapper.map(item, RoleResponse.class)).toList());
         return ApiResponse.<AccountResponse>builder()
-                .result(modelMapper.map(account, AccountResponse.class))
+                .result(accountResponse)
                 .build();
     }
 }

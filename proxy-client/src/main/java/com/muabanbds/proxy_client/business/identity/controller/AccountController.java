@@ -1,5 +1,6 @@
 package com.muabanbds.proxy_client.business.identity.controller;
 
+import com.muabanbds.common_service.dto.identityDto.request.AccountRequest;
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.dto.identityDto.response.PermissionResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
@@ -9,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/accounts")
@@ -23,7 +21,14 @@ public class AccountController {
     AccountClientService clientService;
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<ApiResponse<AccountResponse>> getAccount(@PathVariable("username") String username) {
-        return ResponseEntity.ok(this.clientService.findByUsername(username).getBody());
+    public ApiResponse<AccountResponse> getAccount(@PathVariable("username") String username) {
+        log.info("*** Get, controller; get account by username  ***");
+        return this.clientService.findByUsername(username);
+    }
+
+    @PostMapping
+    public ApiResponse<AccountResponse> createAccount(@RequestBody AccountRequest accountRequest) {
+        log.info("*** Save, controller; save account  ***");
+        return clientService.create(accountRequest);
     }
 }
