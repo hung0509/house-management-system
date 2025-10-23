@@ -30,6 +30,24 @@ services:
       - backend
       - db-net
 
+  core-service:
+    build:
+      context: .
+      dockerfile: core-service/Dockerfile
+      args:
+        MODULE_NAME: core-service
+    depends_on:
+      - my-platform-builder
+    image: core-service
+    container_name: core-service
+    volumes:
+      - maven-repo:/root/.m2
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - backend
+      - db-net
+
   service-discovery:
     build:
       context: .
@@ -101,6 +119,7 @@ services:
         MODULE_NAME: identity-service
     depends_on:
       - service-discovery
+      - core-service
     image: identity-service
     container_name: identity-service
     volumes:

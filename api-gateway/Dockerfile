@@ -21,6 +21,9 @@ ENV SPRING_PROFILES_ACTIVE=prod
 # Copy JAR đúng đường dẫn
 COPY --from=builder /app/api-gateway/target/api-gateway-${PROJECT_VERSION}.jar api-gateway.jar
 
-EXPOSE 8761
+EXPOSE 8443
 
 ENTRYPOINT [ "sh", "-c", "java -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -jar api-gateway.jar" ]
+
+
+

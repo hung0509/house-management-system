@@ -1,4 +1,4 @@
-package com.muabanbds.identity_service.config;
+package com.muabanbds.core_service.config;
 
 import com.muabanbds.common_service.helper.AuditContext;
 import com.muabanbds.common_service.helper.AuditInfo;

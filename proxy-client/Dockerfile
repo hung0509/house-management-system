@@ -21,6 +21,6 @@ ENV SPRING_PROFILES_ACTIVE=prod
 # Copy JAR đúng đường dẫn
 COPY --from=builder /app/proxy-client/target/proxy-client-${PROJECT_VERSION}.jar proxy-client.jar
 
-EXPOSE 8761
+EXPOSE 8888
 
 ENTRYPOINT [ "sh", "-c", "java -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -jar proxy-client.jar" ]

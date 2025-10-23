@@ -39,6 +39,7 @@
 		<module>service-discovery</module>
 		<module>api-gateway</module>
 		<module>identity-service</module>
+		<module>core-service</module>
 	</modules>
 
 	<dependencyManagement>

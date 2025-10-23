@@ -19,8 +19,6 @@ WORKDIR /home/app
 ENV SPRING_PROFILES_ACTIVE=prod
 
 # Copy JAR đúng đường dẫn
-COPY --from=builder /app/identity-service/target/identity-service-${PROJECT_VERSION}.jar identity-service.jar
+COPY --from=builder /app/core-service/target/core-service-${PROJECT_VERSION}.jar core-service.jar
 
-EXPOSE 8258
-
-ENTRYPOINT [ "sh", "-c", "java -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -jar identity-service.jar" ]
+ENTRYPOINT [ "sh", "-c", "java -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -jar core-service.jar" ]

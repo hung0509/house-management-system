@@ -17,7 +17,7 @@ spring:
 eureka:
   client:
     register-with-eureka: true # Cho ph?p ??ng k? v?o m?y ch? eureka
-    fetch-registry: true #service n?y nh?n danh s?ch c?c service kh?c
+    fetch-registry: true #service n?y nh?n danh s?ch c?c  service kh?c
     service-url:
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
 
