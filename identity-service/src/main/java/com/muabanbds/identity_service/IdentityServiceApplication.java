@@ -6,7 +6,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication(scanBasePackages = {
 		"com.muabanbds.identity_service",
-		"com.muabanbds.common_service",
 		"com.muabanbds.core_service"
 })
 @EnableDiscoveryClient

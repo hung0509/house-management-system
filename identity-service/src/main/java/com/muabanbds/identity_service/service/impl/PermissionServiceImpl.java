@@ -1,6 +1,5 @@
 package com.muabanbds.identity_service.service.impl;
 
-import com.muabanbds.common_service.config.ModelMapperConfig;
 import com.muabanbds.common_service.dto.identityDto.request.PermissionRequest;
 import com.muabanbds.common_service.dto.identityDto.response.PermissionResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
@@ -9,7 +8,6 @@ import com.muabanbds.identity_service.entity.Permission;
 import com.muabanbds.identity_service.repository.PermissionRepository;
 import com.muabanbds.identity_service.service.PermissionService;
 import com.muabanbds.identity_service.specification.PermissionSpecification;
-import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

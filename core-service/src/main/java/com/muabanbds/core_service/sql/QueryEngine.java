@@ -1,20 +1,24 @@
-package com.muabanbds.common_service.sql;
+package com.muabanbds.core_service.sql;
 
 
 import com.muabanbds.common_service.dto.identityDto.BaseQueryRequest;
+import com.muabanbds.common_service.sql.Pagination;
+import com.muabanbds.common_service.sql.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
+
 
 import javax.sql.DataSource;
 import java.sql.*;
 
 @Service
 @Slf4j
+@ConditionalOnBean(DataSource.class) // ✅ Chỉ tạo bean khi có DataSource trong context
 public class QueryEngine {
 
     private final DataSource dataSource;
-
 
     public QueryEngine(DataSource dataSource) {
         this.dataSource = dataSource;

@@ -2,8 +2,8 @@ package com.muabanbds.proxy_client.jwt;
 
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.dto.identityDto.response.RoleResponse;
-import com.muabanbds.common_service.exception.AppException;
-import com.muabanbds.common_service.exception.ErrorCode;
+import com.muabanbds.core_service.exception.AppException;
+import com.muabanbds.core_service.exception.ErrorCode;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
@@ -12,7 +12,6 @@ import com.nimbusds.jwt.SignedJWT;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;

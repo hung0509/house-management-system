@@ -1,4 +1,4 @@
-package com.muabanbds.common_service.config;
+package com.muabanbds.core_service.config;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
