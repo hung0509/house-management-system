@@ -1,6 +1,5 @@
 package com.muabanbds.common_service.dto.identityDto.response;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

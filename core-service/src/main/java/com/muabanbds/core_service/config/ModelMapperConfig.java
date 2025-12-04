@@ -1,5 +1,8 @@
 package com.muabanbds.core_service.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -20,5 +23,11 @@ public class ModelMapperConfig {
                 .setMatchingStrategy(MatchingStrategies.STRICT)
                 .setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
         return modelMapper;
+    }
+
+    @Bean
+    public ObjectMapper objectMapperBean() {
+        return new JsonMapper()
+                .enable(SerializationFeature.INDENT_OUTPUT);
     }
 }

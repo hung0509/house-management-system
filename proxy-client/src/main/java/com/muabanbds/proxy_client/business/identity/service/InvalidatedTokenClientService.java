@@ -1,7 +1,6 @@
 package com.muabanbds.proxy_client.business.identity.service;
 
 import com.muabanbds.common_service.dto.identityDto.request.InvalidatedTokenRequest;
-import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.dto.identityDto.response.InvalidatedTokenResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
 import org.springframework.cloud.openfeign.FeignClient;

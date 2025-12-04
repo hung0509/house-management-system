@@ -1,4 +1,4 @@
-package com.muabanbds.identity_service.entity;
+package com.muabanbds.core_service.entity;
 
 import com.muabanbds.common_service.helper.AuditContext;
 import jakarta.persistence.Column;
@@ -7,11 +7,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
-import java.util.Date;
 
 @MappedSuperclass
 @Getter

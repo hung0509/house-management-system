@@ -1,6 +1,5 @@
 package com.muabanbds.identity_service.repository;
 
-import com.muabanbds.identity_service.entity.Permission;
 import com.muabanbds.identity_service.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

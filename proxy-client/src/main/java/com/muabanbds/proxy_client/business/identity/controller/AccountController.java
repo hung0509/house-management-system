@@ -2,14 +2,12 @@ package com.muabanbds.proxy_client.business.identity.controller;
 
 import com.muabanbds.common_service.dto.identityDto.request.AccountRequest;
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
-import com.muabanbds.common_service.dto.identityDto.response.PermissionResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
 import com.muabanbds.proxy_client.business.identity.service.AccountClientService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

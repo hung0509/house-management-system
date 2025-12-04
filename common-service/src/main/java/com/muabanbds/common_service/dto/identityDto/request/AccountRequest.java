@@ -1,11 +1,9 @@
 package com.muabanbds.common_service.dto.identityDto.request;
 
-import com.muabanbds.common_service.dto.identityDto.response.RoleResponse;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder

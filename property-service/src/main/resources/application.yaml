@@ -1,0 +1,51 @@
+server:
+  servlet:
+    context-path: /property-service
+  port: 8109
+
+spring:
+  application:
+    name: PROPERTY-SERVICE
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://${PROPERTY_DB_HOST:localhost}:${PROPERTY_DB_PORT:5434}/${PROPERTY_DB_NAME:db_property}
+    username: ${PROPERTY_DB_USERNAME:postgre}
+    password: ${PROPERTY_DB_PASSWORD:Hung@1234}
+    driver-class-name: org.postgresql.Driver
+
+eureka:
+  client:
+    register-with-eureka: true # Cho ph?p ??ng k? v?o m?y ch? eureka
+    fetch-registry: true #service n?y nh?n danh s?ch c?c  service kh?c
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
+
+jwt:
+  signerKey: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
+  valid-duration: 36000 # in second
+  refreshable-duration: 72000 # in seconds
+  valid-discount-duration: 7
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      cloudConfig:  # t?n circuit breaker, d?ng cho 1 Feign client ho?c logic n?o ??
+        failure-rate-threshold: 50           # N?u ?50% l?i th? ng?t m?ch
+        minimum-number-of-calls: 5           # ?t nh?t 5 g?i m?i ki?m tra l?i
+        wait-duration-in-open-state: 5s      # ??i 5s tr??c khi th? l?i
+        sliding-window-size: 10              # Nh? 10 g?i g?n nh?t
+        sliding-window-type: COUNT_BASED     # C?a s? tr??t theo s? l??ng g?i
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoint:
+    health:
+      show-details: always
+

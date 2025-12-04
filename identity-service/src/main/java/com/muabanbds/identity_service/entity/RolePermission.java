@@ -1,5 +1,6 @@
 package com.muabanbds.identity_service.entity;
 
+import com.muabanbds.core_service.entity.CommonMappedEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -11,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "d_role_permission")
 @Builder
-public class RolePermission extends CommonMappedEntity{
+public class RolePermission extends CommonMappedEntity {
     @Id
     @Column(name = "d_role_permission_id", nullable = false, precision = 10)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_permission_id_seq")

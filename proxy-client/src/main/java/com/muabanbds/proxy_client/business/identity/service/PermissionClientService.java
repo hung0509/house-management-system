@@ -6,7 +6,6 @@ import com.muabanbds.common_service.payload.ApiResponse;
 import com.muabanbds.common_service.payload.ApiResponsePagination;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

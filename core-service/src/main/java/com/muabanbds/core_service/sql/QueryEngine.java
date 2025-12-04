@@ -15,7 +15,6 @@ import java.sql.*;
 
 @Service
 @Slf4j
-@ConditionalOnBean(DataSource.class) // ✅ Chỉ tạo bean khi có DataSource trong context
 public class QueryEngine {
 
     private final DataSource dataSource;

@@ -3,7 +3,6 @@ package com.muabanbds.identity_service.service.impl;
 import com.muabanbds.common_service.dto.identityDto.request.InvalidatedTokenRequest;
 import com.muabanbds.common_service.dto.identityDto.response.InvalidatedTokenResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
-import com.muabanbds.identity_service.entity.InvalidatedToken;
 import com.muabanbds.identity_service.repository.InvalidatedTokenRepository;
 import com.muabanbds.identity_service.service.InvalidatedTokenService;
 import lombok.AccessLevel;

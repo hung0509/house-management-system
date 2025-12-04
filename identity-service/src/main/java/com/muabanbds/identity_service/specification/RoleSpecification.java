@@ -4,8 +4,6 @@ import com.muabanbds.common_service.dto.identityDto.request.RoleRequest;
 import com.muabanbds.identity_service.entity.Role;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.math.BigDecimal;
-
 public class RoleSpecification {
     public static Specification<Role> isRoleId(Integer id)
     {

@@ -1,3 +1,16 @@
 spring:
   application:
     name: CORE-SERVICE
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://${LOG_DB_HOST:localhost}:${LOG_DB_PORT:5435}/${LOG_DB_NAME:db_log}
+    username: ${LOG_DB_USERNAME:postgre}
+    password: ${LOG_DB_PASSWORD:Hung@1234}
+    driver-class-name: org.postgresql.Driver
+
+kafka:
+  hostname: localhost
+  port: 9092
+  group-id: gr-sync-order
+
