@@ -13,7 +13,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>My Platform</name>
-	<description>To build a modern, user-friendly online platform that connects property buyers, sellers, and agents across Vietnam. </description>
+	<description>To build a modern, user-friendly online platform that connects property buyers,
+        sellers, and agents across Vietnam. </description>
 	<url/>
 	<licenses>
 		<license/>
@@ -60,18 +61,12 @@
 				<version>20210307</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<version>${lombok.version}</version>
-				<scope>provided</scope>
-			</dependency>
-
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <scope>test</scope>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
+
 		</dependencies>
 	</dependencyManagement>
 

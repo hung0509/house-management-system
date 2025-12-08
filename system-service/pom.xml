@@ -74,6 +74,12 @@
             <artifactId>firebase-admin</artifactId>
             <version>9.2.0</version> <!-- chạy tốt với Spring Boot 3 -->
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 	<build>
 		<plugins>
