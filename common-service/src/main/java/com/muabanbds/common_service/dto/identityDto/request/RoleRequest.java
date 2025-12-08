@@ -1,6 +1,6 @@
 package com.muabanbds.common_service.dto.identityDto.request;
 
-import com.muabanbds.common_service.dto.identityDto.BaseQueryRequest;
+import com.muabanbds.common_service.dto.BaseQueryRequest;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -4,14 +4,16 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 
 @Slf4j
-public final class DbMetadataHelper {
+@Component
+public  class DbMetadataHelper {
 
     // Lấy tên bảng từ entity sử dụng annotation @Table
-    public static String getTableName(Object entity) {
+    public  String getTableName(Object entity) {
         try {
             Table tableAnnotation = entity.getClass().getAnnotation(Table.class);
             if (tableAnnotation != null && tableAnnotation.name() != null && !tableAnnotation.name().isEmpty()) {
@@ -27,7 +29,7 @@ public final class DbMetadataHelper {
     }
 
     // Lấy tên cột từ tên thuộc tính sử dụng annotation @Column hoặc @JoinColumn
-    public static String getColumnName(Object entity, String propertyName) {
+    public  String getColumnName(Object entity, String propertyName) {
         try {
             // Tìm field tương ứng với propertyName
             Field field = findField(entity.getClass(), propertyName);
@@ -54,7 +56,7 @@ public final class DbMetadataHelper {
     }
 
     // Tìm field trong class hoặc các superclass
-    private static Field findField(Class<?> clazz, String propertyName) {
+    private  Field findField(Class<?> clazz, String propertyName) {
         while (clazz != null) {
             try {
                 Field field = clazz.getDeclaredField(propertyName);

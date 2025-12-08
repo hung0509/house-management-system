@@ -27,15 +27,15 @@ jwt:
   refreshable-duration: 72000 # in seconds
   valid-discount-duration: 7
 
-resilience4j:
-  circuitbreaker:
-    instances:
-      cloudConfig:  # t?n circuit breaker, d?ng cho 1 Feign client ho?c logic n?o ??
-        failure-rate-threshold: 50           # N?u ?50% l?i th? ng?t m?ch
-        minimum-number-of-calls: 5           # ?t nh?t 5 g?i m?i ki?m tra l?i
-        wait-duration-in-open-state: 5s      # ??i 5s tr??c khi th? l?i
-        sliding-window-size: 10              # Nh? 10 g?i g?n nh?t
-        sliding-window-type: COUNT_BASED     # C?a s? tr??t theo s? l??ng g?i
+  resilience4j:
+    circuitbreaker:
+      instances:
+        cloudConfig:  # t?n circuit breaker, d?ng cho 1 Feign client ho?c logic n?o ??
+          failure-rate-threshold: 50           # N?u ?50% l?i th? ng?t m?ch
+          minimum-number-of-calls: 5           # ?t nh?t 5 g?i m?i ki?m tra l?i
+          wait-duration-in-open-state: 5s      # ??i 5s tr??c khi th? l?i
+          sliding-window-size: 10              # Nh? 10 g?i g?n nh?t
+          sliding-window-type: COUNT_BASED     # C?a s? tr??t theo s? l??ng g?i
 
 management:
   endpoints:

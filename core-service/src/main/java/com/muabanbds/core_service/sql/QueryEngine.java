@@ -1,12 +1,11 @@
 package com.muabanbds.core_service.sql;
 
 
-import com.muabanbds.common_service.dto.identityDto.BaseQueryRequest;
+import com.muabanbds.common_service.dto.BaseQueryRequest;
 import com.muabanbds.common_service.sql.Pagination;
 import com.muabanbds.common_service.sql.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 
 

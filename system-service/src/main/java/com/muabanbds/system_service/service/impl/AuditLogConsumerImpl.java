@@ -1,13 +1,13 @@
-package com.muabanbds.core_service.service.impl;
+package com.muabanbds.system_service.service.impl;
 
 import com.muabanbds.common_service.dto.identityDto.request.AuditLogRequest;
 import com.muabanbds.common_service.helper.ParseHelper;
-import com.muabanbds.core_service.entity.AbstractAuditLog;
-import com.muabanbds.core_service.entity.AuditLog;
-import com.muabanbds.core_service.entity.AuditLogUser;
-import com.muabanbds.core_service.repository.AuditLogRepository;
-import com.muabanbds.core_service.repository.AuditLogUserRepository;
-import com.muabanbds.core_service.service.AuditLogConsumer;
+import com.muabanbds.system_service.repository.AuditLogRepository;
+import com.muabanbds.system_service.repository.AuditLogUserRepository;
+import com.muabanbds.system_service.service.AuditLogConsumer;
+import com.muabanbds.system_service.entity.AbstractAuditLog;
+import com.muabanbds.system_service.entity.AuditLog;
+import com.muabanbds.system_service.entity.AuditLogUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -29,7 +29,8 @@ public class AuditLogConsumerImpl implements AuditLogConsumer {
                 : "unknown-key";
 
         // Kiểm tra dữ liệu bắt buộc
-        if (auditLogRequest.getEntityName() == null || auditLogRequest.getAction() == null) {
+        if (auditLogRequest.getEntityName() == null || auditLogRequest.getAction() == null ||
+                "AuditLog".equalsIgnoreCase(auditLogRequest.getEntityName()) || "AuditLogUser".equalsIgnoreCase(auditLogRequest.getEntityName()))  {
             log.error("Missing required fields: entityName or action, key={}, request={}", key, auditLogRequest);
             ack.acknowledge();
             return;

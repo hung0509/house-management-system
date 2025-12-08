@@ -1,6 +1,7 @@
-package com.muabanbds.core_service.repository;
+package com.muabanbds.system_service.repository;
 
-import com.muabanbds.core_service.entity.AuditLog;
+
+import com.muabanbds.system_service.entity.AuditLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

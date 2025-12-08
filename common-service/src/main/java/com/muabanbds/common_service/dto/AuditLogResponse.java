@@ -1,4 +1,4 @@
-package com.muabanbds.common_service.dto.identityDto;
+package com.muabanbds.common_service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

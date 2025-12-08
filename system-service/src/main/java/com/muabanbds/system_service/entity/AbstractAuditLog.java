@@ -1,4 +1,4 @@
-package com.muabanbds.core_service.entity;
+package com.muabanbds.system_service.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;

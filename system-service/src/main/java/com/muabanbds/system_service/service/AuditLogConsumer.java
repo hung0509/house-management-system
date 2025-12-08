@@ -1,4 +1,4 @@
-package com.muabanbds.core_service.service;
+package com.muabanbds.system_service.service;
 
 import com.muabanbds.common_service.dto.identityDto.request.AuditLogRequest;
 import org.springframework.kafka.support.Acknowledgment;

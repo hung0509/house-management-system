@@ -3,8 +3,8 @@ package com.muabanbds.core_service.config.audit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.muabanbds.common_service.dto.identityDto.request.AuditLogRequest;
 import com.muabanbds.common_service.helper.AuditContext;
-import com.muabanbds.core_service.entity.AuditLog;
-import com.muabanbds.core_service.entity.AuditLogUser;
+//import com.muabanbds.core_service.entity.AuditLog;
+//import com.muabanbds.core_service.entity.AuditLogUser;
 import com.muabanbds.core_service.helper.DbMetadataHelper;
 import com.muabanbds.core_service.service.AuditLogProducer;
 import lombok.AllArgsConstructor;
@@ -32,6 +32,7 @@ public class AuditEntityInterceptor implements Interceptor {
     private final Environment environment;
     private final AuditLogProducer auditLogProducer;
     private final ObjectMapper objectMapper;
+    private final DbMetadataHelper dbMetadataHelper;
 
     // Map<entityName-rowId, Map<fieldName, FieldChange>>
     private final ThreadLocal<Map<String, Map<String, FieldChange>>> pendingChanges =
@@ -49,12 +50,12 @@ public class AuditEntityInterceptor implements Interceptor {
 
         log.info("onFlushDirty triggered for entity: {}", entity.getClass().getSimpleName());
 
-        if (entity instanceof AuditLog || entity instanceof AuditLogUser) {
-            log.warn("Skipping audit log for UPDATE on AuditLog entity to prevent loop");
-            return false;
-        }
+//        if (entity instanceof AuditLog || entity instanceof AuditLogUser) {
+//            log.warn("Skipping audit log for UPDATE on AuditLog entity to prevent loop");
+//            return false;
+//        }
 
-        String entityName = DbMetadataHelper.getTableName(entity);
+        String entityName = dbMetadataHelper.getTableName(entity);
         String entityKey = entityName + "-" + id;
         Map<String, Map<String, FieldChange>> txMap = pendingChanges.get();
         Map<String, FieldChange> fieldMap = txMap.computeIfAbsent(entityKey, k -> new HashMap<>());
@@ -62,7 +63,7 @@ public class AuditEntityInterceptor implements Interceptor {
         for (int i = 0; i < propertyNames.length; i++) {
 
             String propertyName = propertyNames[i];
-            String fieldName = DbMetadataHelper.getColumnName(entity, propertyName);
+            String fieldName = dbMetadataHelper.getColumnName(entity, propertyName);
 
 //            if (loggedFields.contains(fieldName)) {
 //                continue; // Skip if already logged in this transaction
@@ -173,12 +174,12 @@ public class AuditEntityInterceptor implements Interceptor {
 
         log.info("onSave triggered for entity: {}", entity.getClass().getSimpleName());
 
-        if (entity instanceof AuditLog || entity instanceof AuditLogUser) {
-            log.warn("Skipping audit log for INSERT on AuditLog entity to prevent loop");
-            return false;
-        }
+//        if (entity instanceof AuditLog || entity instanceof AuditLogUser) {
+//            log.warn("Skipping audit log for INSERT on AuditLog entity to prevent loop");
+//            return false;
+//        }
 
-        String entityName = DbMetadataHelper.getTableName(entity);
+        String entityName = dbMetadataHelper.getTableName(entity);
         if (AuditContext.getAuditInfo() == null) {
             log.warn("AuditContext is null, skipping audit log for INSERT on entity: {}", entityName);
             return false;
@@ -214,12 +215,12 @@ public class AuditEntityInterceptor implements Interceptor {
 
         log.info("onDelete triggered for entity: {}", entity.getClass().getSimpleName());
 
-        if (entity instanceof AuditLog || entity instanceof AuditLogUser) {
-            log.warn("Skipping audit log for DELETE on AuditLog entity to prevent loop");
-            return;
-        }
+//        if (entity instanceof AuditLog || entity instanceof AuditLogUser) {
+//            log.warn("Skipping audit log for DELETE on AuditLog entity to prevent loop");
+//            return;
+//        }
 
-        String entityName = DbMetadataHelper.getTableName(entity);
+        String entityName = dbMetadataHelper.getTableName(entity);
         if (AuditContext.getAuditInfo() == null) {
             log.warn("AuditContext is null, skipping audit log for DELETE on entity: {}", entityName);
             return;
