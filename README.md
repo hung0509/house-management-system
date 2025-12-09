@@ -4,12 +4,13 @@ A microservice-based system for managing real estate information, including prop
 
 ## 🚀 Technologies Used
 
-- **Java 17** / **Spring Boot**
+- **Java 17** / **Spring Boot 3.2.5**
 - **Spring Cloud** (Eureka, Config, Gateway)
-- **PostgreSQL** (or MySQL)
+- **PostgreSQL** 
 - **Docker & Docker Compose**
 - **Spring Security / JWT**
-
+- **Firebase**
+- **Kafka**
 ## 🧱 Microservice Architecture
 
 
@@ -25,6 +26,8 @@ A microservice-based system for managing real estate information, including prop
 | `transaction-service`| Records purchases, transfers              |
 | `config-service`     | Centralized config for microservices      |
 | `discovery-service`  | Eureka registry for service discovery     |
+| `core-service`       | Configuration bean common                 |
+| `system-service`     | AuditLog, Nofifycation and Theme Server   |
 
 
 🔒 Security
