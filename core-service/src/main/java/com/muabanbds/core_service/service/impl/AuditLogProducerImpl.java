@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 
 
-@Component
 @RequiredArgsConstructor
 @Slf4j
 public class AuditLogProducerImpl implements AuditLogProducer {

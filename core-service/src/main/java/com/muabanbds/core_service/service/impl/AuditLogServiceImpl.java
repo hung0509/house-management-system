@@ -24,7 +24,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Service
 @RequiredArgsConstructor
 @Slf4j
 public class AuditLogServiceImpl implements AuditLogService {

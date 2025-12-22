@@ -20,4 +20,8 @@ public abstract class AppConstant {
         public static final String DOCUMENT_SEARCH_SECTION = "search_section";
     }
 
+    public static final class RESPONSE_STATUS {
+        public static final Integer BAD_REQUEST = 400;
+        public static final Integer UNAUTHORIZED = 401;
+    }
 }

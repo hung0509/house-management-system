@@ -1,4 +1,4 @@
-package com.muabanbds.core_service.exception;
+package com.muabanbds.common_service.exception;
 
 import lombok.AccessLevel;
 import lombok.Builder;

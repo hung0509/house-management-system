@@ -1,4 +1,4 @@
-package com.muabanbds.core_service.entity;
+package com.muabanbds.Property.Service.entity;
 
 import com.muabanbds.common_service.helper.AuditContext;
 import jakarta.persistence.Column;

@@ -1,0 +1,9 @@
+com.muabanbds.core_service.config.ModelMapperConfig
+com.muabanbds.core_service.config.auto.AuditAutoConfiguration
+com.muabanbds.core_service.config.auto.WebAuditAutoConfiguration
+com.muabanbds.core_service.config.messource.MessageSourceConfig
+com.muabanbds.core_service.config.ClientConfig
+com.muabanbds.core_service.config.auto.DbMetadataAutoConfiguration
+com.muabanbds.core_service.config.auto.AuditHibernateAutoConfiguration
+com.muabanbds.core_service.config.auto.AuditQueryAutoConfiguration
+com.muabanbds.core_service.config.auto.QueryEngineAutoConfiguration

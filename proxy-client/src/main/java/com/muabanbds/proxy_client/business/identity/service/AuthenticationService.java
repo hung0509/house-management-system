@@ -4,8 +4,8 @@ import com.muabanbds.common_service.dto.identityDto.request.AuthenticationReques
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.dto.identityDto.response.AuthenticationResponse;
 import com.muabanbds.common_service.payload.ApiResponse;
-import com.muabanbds.core_service.exception.AppException;
-import com.muabanbds.core_service.exception.ErrorCode;
+import com.muabanbds.common_service.exception.AppException;
+import com.muabanbds.common_service.exception.ErrorCode;
 import com.muabanbds.proxy_client.jwt.JwtUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

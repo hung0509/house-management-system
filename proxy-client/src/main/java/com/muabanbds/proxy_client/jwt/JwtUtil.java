@@ -2,8 +2,8 @@ package com.muabanbds.proxy_client.jwt;
 
 import com.muabanbds.common_service.dto.identityDto.response.AccountResponse;
 import com.muabanbds.common_service.dto.identityDto.response.RoleResponse;
-import com.muabanbds.core_service.exception.AppException;
-import com.muabanbds.core_service.exception.ErrorCode;
+import com.muabanbds.common_service.exception.AppException;
+import com.muabanbds.common_service.exception.ErrorCode;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;

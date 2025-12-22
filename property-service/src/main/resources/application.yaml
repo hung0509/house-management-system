@@ -49,3 +49,18 @@ management:
     health:
       show-details: always
 
+core:
+  interceptor: true
+  entity: true
+  log-service: true
+  database: true
+  extract-header: true
+  kafka: true
+  message-source: true
+  query-engine: true
+
+kafka:
+  hostname: localhost
+  port: 9092
+  group-id: gr-sync-order
+

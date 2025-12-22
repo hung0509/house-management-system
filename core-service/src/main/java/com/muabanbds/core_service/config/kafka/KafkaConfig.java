@@ -1,10 +1,16 @@
 package com.muabanbds.core_service.config.kafka;
 
+import com.muabanbds.core_service.service.AuditLogProducer;
+import com.muabanbds.core_service.service.impl.AuditLogProducerImpl;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -17,8 +23,14 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+@AutoConfiguration
 @EnableKafka
+@ConditionalOnClass(KafkaTemplate.class)
+@ConditionalOnProperty(
+        prefix = "core",
+        name = "kafka",
+        havingValue = "true"
+)
 public class KafkaConfig {
 
     @Value("${kafka.hostname}")
@@ -32,11 +44,20 @@ public class KafkaConfig {
 
     // PRODUCER
     @Bean
+    @ConditionalOnMissingBean(KafkaTemplate.class)
     KafkaTemplate<String, Object> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
+    public AuditLogProducer auditLogProducer(
+            KafkaTemplate<String, Object> kafkaTemplate
+    ) {
+        return new AuditLogProducerImpl(kafkaTemplate);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(KafkaTemplate.class)
     public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> props = new HashMap<>();
 
@@ -58,6 +79,7 @@ public class KafkaConfig {
 
     // CONSUMER
     @Bean
+    @ConditionalOnMissingBean(KafkaTemplate.class)
     public ConsumerFactory<String, Object> consumerFactory() {
 
         JsonDeserializer<Object> jsonDeserializer = new JsonDeserializer<>();
@@ -81,6 +103,7 @@ public class KafkaConfig {
 
     // LISTENER CONTAINER
     @Bean
+    @ConditionalOnMissingBean(KafkaTemplate.class)
     public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Object> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();

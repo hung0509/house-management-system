@@ -4,10 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication(scanBasePackages = {
-		"com.muabanbds.identity_service",
-		"com.muabanbds.core_service"
-})
+@SpringBootApplication
 @EnableDiscoveryClient
 public class IdentityServiceApplication {
 

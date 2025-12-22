@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Interceptor;
 import org.hibernate.Transaction;
 import org.hibernate.type.Type;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Component
 @Slf4j
 @RequiredArgsConstructor
 public class AuditEntityInterceptor implements Interceptor {

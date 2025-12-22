@@ -17,7 +17,6 @@ COPY system-service/pom.xml system-service/pom.xml
 RUN mkdir -p \
     common-service core-service proxy-client service-discovery \
     api-gateway identity-service property-service system-service
-
 RUN mvn -B -DskipTests dependency:go-offline
 
 COPY . .
@@ -29,7 +28,7 @@ WORKDIR /app
 
 #ENV SPRING_PROFILES_ACTIVE=prod
 
-COPY --from=build /build/identity-service/target/*.jar app.jar
+COPY --from=build /build/property-service/target/*.jar app.jar
 
-EXPOSE 8258
+EXPOSE 8109
 ENTRYPOINT ["java","-jar","app.jar"]

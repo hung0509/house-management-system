@@ -57,12 +57,6 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.muabanbds</groupId>
-			<artifactId>common-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 <!--	<dependencyManagement>-->
 <!--		<dependencies>-->

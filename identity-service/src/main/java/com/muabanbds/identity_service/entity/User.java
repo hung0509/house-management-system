@@ -1,6 +1,5 @@
 package com.muabanbds.identity_service.entity;
 
-import com.muabanbds.core_service.entity.CommonMappedEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

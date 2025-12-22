@@ -1,26 +1,34 @@
-# Stage 1: Cài dependency
-FROM maven:3.9.6-eclipse-temurin-17 AS my-platform-builder
+# ========= BUILD STAGE =========
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /build
-COPY . .
-RUN mvn clean install -DskipTests
 
-# Stage 2: Build JAR
-FROM maven:3.9.6-eclipse-temurin-17-alpine AS builder
+COPY pom.xml .
+# 2️⃣ Copy pom của TẤT CẢ module (để Maven không lỗi)
+COPY common-service/pom.xml common-service/pom.xml
+COPY core-service/pom.xml core-service/pom.xml
+COPY proxy-client/pom.xml proxy-client/pom.xml
+COPY service-discovery/pom.xml service-discovery/pom.xml
+COPY api-gateway/pom.xml api-gateway/pom.xml
+COPY identity-service/pom.xml identity-service/pom.xml
+COPY property-service/pom.xml property-service/pom.xml
+COPY system-service/pom.xml system-service/pom.xml
+
+# 3️⃣ Tạo folder rỗng cho module (QUAN TRỌNG)
+RUN mkdir -p \
+    common-service core-service proxy-client service-discovery \
+    api-gateway identity-service property-service system-service
+RUN mvn -B -DskipTests dependency:go-offline
+
+COPY . .
+
+RUN mvn -B clean package -DskipTests
+
+FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY . .
-RUN mvn clean package -DskipTests
 
-# Stage 3: Runtime
-FROM alpine:3.20
-RUN apk update && apk add --no-cache openjdk17-jre
+#ENV SPRING_PROFILES_ACTIVE=prod
 
-ARG PROJECT_VERSION=0.0.1-SNAPSHOT
-WORKDIR /home/app
-ENV SPRING_PROFILES_ACTIVE=prod
-
-# Copy JAR đúng đường dẫn
-COPY --from=builder /app/proxy-client/target/proxy-client-${PROJECT_VERSION}.jar proxy-client.jar
+COPY --from=build /build/proxy-client/target/*.jar app.jar
 
 EXPOSE 8888
-
-ENTRYPOINT [ "sh", "-c", "java -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -jar proxy-client.jar" ]
+ENTRYPOINT ["java","-jar","app.jar"]

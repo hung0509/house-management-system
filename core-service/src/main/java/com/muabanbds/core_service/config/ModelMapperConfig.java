@@ -7,27 +7,30 @@ import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.convention.NamingConventions;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@AutoConfiguration
+@ConditionalOnClass(ModelMapper.class)
 public class ModelMapperConfig {
+
     @Bean
+    @ConditionalOnMissingBean(ModelMapper.class)
     public ModelMapper modelMapper() {
-        ModelMapper modelMapper = new ModelMapper();
+        ModelMapper mapper = new ModelMapper();
 
-        modelMapper.getConfiguration()
+        mapper.getConfiguration()
                 .setFieldMatchingEnabled(true)
-                .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
+                .setFieldAccessLevel(
+                        org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
                 .setPropertyCondition(Conditions.isNotNull())
-                .setMatchingStrategy(MatchingStrategies.STRICT)
-                .setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
-        return modelMapper;
-    }
+                .setMatchingStrategy(MatchingStrategies.STANDARD);
 
-    @Bean
-    public ObjectMapper objectMapperBean() {
-        return new JsonMapper()
-                .enable(SerializationFeature.INDENT_OUTPUT);
+        return mapper;
     }
 }
+

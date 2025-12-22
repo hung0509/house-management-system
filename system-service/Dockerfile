@@ -29,7 +29,7 @@ WORKDIR /app
 
 #ENV SPRING_PROFILES_ACTIVE=prod
 
-COPY --from=build /build/identity-service/target/*.jar app.jar
+COPY --from=build /build/system-service/target/*.jar app.jar
 
-EXPOSE 8258
+EXPOSE 8111
 ENTRYPOINT ["java","-jar","app.jar"]

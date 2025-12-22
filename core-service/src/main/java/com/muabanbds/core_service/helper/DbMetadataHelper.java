@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
 
 @Slf4j
-@Component
 public  class DbMetadataHelper {
 
     // Lấy tên bảng từ entity sử dụng annotation @Table

@@ -2,7 +2,7 @@ package com.muabanbds.proxy_client.config.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.muabanbds.common_service.payload.ApiResponse;
-import com.muabanbds.core_service.exception.ErrorCode;
+import com.muabanbds.common_service.exception.ErrorCode;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             throws IOException, ServletException {
         ErrorCode errorCode = ErrorCode.UNAUTHENTICATED;
 
-        response.setStatus(errorCode.getStatus().value());
+        response.setStatus(errorCode.getStatus());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
         ApiResponse<?> apiResponse = ApiResponse.builder()
