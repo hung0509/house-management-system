@@ -1,6 +1,6 @@
 # 🏡 Real Estate Microservice System
 
-A microservice-based system for managing real estate information, including properties, land ownership, users, and transactions. Designed for scalability, modularity, and ease of integration.
+A microservice-based platform for managing a matcha shop, supporting order processing, inventory management, staff scheduling, and user management. Designed for scalability, modularity, and real-time integration.
 
 ## 🚀 Technologies Used
 
@@ -23,7 +23,7 @@ A microservice-based system for managing real estate information, including prop
 | `auth-service`       | Handles login, JWT, roles/permissions     |
 | `user-service`       | Manages user profiles, owners             |
 | `property-service`   | Manages real estate assets & land info    |
-| `transaction-service`| Records purchases, transfers              |
+| `order-service`      | Handles order processing, status management|
 | `config-service`     | Centralized config for microservices      |
 | `discovery-service`  | Eureka registry for service discovery     |
 | `core-service`       | Configuration bean common                 |
